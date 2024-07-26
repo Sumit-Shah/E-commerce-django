@@ -6,3 +6,5 @@ urlpatterns = [
     path('',index),
     path('about-us',about_us),
 ]
+
+
