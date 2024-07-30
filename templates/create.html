@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block body %}
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+{% endif %}
+<form action="create" method="POST">
+
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputtitle1" class="form-label">Title </label>
+      <input type="text" name="title" class="form-control" id="exampleInputtitle1" aria-describedby="titleHelp">
+      <div id="titleHelp" class="form-text">  </div>
+      
+      <div class="form-floating">
+        <textarea class="form-control" name="description" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Description</label>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+{% endblock body %}

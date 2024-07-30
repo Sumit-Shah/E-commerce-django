@@ -1,29 +1,31 @@
-from django.shortcuts import render,HttpResponse
-
+from django.shortcuts import render,HttpResponse,redirect
+from.models import Task
 # Create your views here.
 def index(request):
-    people=[
-        {
-            'name':"Sumit",
-            'age':25,
-            'gender':'Male'
-        },
-        {
-            'name':"Santosh",
-            'age':22,
-            'gender':'Male'
-        },
-        {
-            'name':"Rajni",
-            'age':26,
-            'gender':'Female'
-        }
-    ]
-    
+    tasks=Task.objects.all()
     context={
-        'people':people
+        'tasks':tasks
     }
     return render(request, 'index.html',context)
 
+
+def create(request):
+    if request.method == "POST":
+        title=request.POST.get('title')
+        description=request.POST.get('description')
+        
+        if title == "" or description == "":
+            context={
+                'error':'Both field are required.'
+            }
+            return render(request, 'create.html',context)
+        
+        
+        Task.objects.create(name=title, description=description)
+        return redirect("/")
+    
+    return render(request, 'create.html')
+    
+    
 def about_us(request):
     return render(request,'about_us.html')

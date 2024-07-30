@@ -12,6 +12,6 @@ todo
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     description=models.TextField()
     status=models.BooleanField(default=False)
